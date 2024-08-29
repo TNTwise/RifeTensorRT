@@ -1,0 +1,30 @@
+name: build-prerelease
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build-Linux:
+  
+    runs-on: ubuntu-20.04 
+    permissions: write-all  
+    steps:
+      - uses: Jimver/cuda-toolkit@v0.2.16
+        id: cuda-toolkit
+        with:
+          cuda: '12.5.0'
+      - uses: actions/checkout@v3
+      
+      - name: Install Deps
+        run: | 
+          sudo apt-get install libopencv-dev libprotobuf-dev protobuf-compiler libcurl4-openssl-dev
+
+      - name: Install LibTorch
+        run: |
+          wget https://download.pytorch.org/libtorch/cu124/libtorch-cxx11-abi-shared-with-deps-2.4.0%2Bcu124.zip
+    
+              
+              
+        
+
+     

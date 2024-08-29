@@ -25,7 +25,19 @@ endif()
 find_package(CUDA REQUIRED)
 
 # Find Protobuf
-find_package(protobuf CONFIG REQUIRED)
+find_package(protobuf CONFIG)
+if(protobuf_FOUND)
+    set(PROTOBUF_FOUND ${protobuf_FOUND})
+    set(PROTOBUF_VERSION ${protobuf_VERSION})
+else()
+    # fallback to system
+    find_package(Protobuf)
+    set(PROTOBUF_FOUND ${Protobuf_FOUND})
+    set(PROTOBUF_VERSION ${Protobuf_VERSION})
+    if(TARGET protobuf::protoc)
+        set_target_properties(protobuf::protoc PROPERTIES IMPORTED_LOCATION_RELEASE "${PROTOBUF_PROTOC_EXECUTABLE}")
+    endif()
+endif()
 
 # Find Torch
 find_package(Torch REQUIRED)

@@ -1,4 +1,4 @@
-name: build-prerelease
+name: build
 
 on:
   workflow_dispatch:
@@ -22,6 +22,9 @@ jobs:
       - name: Install LibTorch
         run: |
           wget https://download.pytorch.org/libtorch/cu124/libtorch-cxx11-abi-shared-with-deps-2.4.0%2Bcu124.zip
+      - name: Install TensorRT
+        run: |
+          wget https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/10.3.0/tars/TensorRT-10.3.0.26.Linux.x86_64-gnu.cuda-12.5.tar.gz
     
               
               
